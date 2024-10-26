@@ -21,11 +21,10 @@ jobs:
           dotnet-version: '8.0'
 
       - name: Restore dependencies
-        run: dotnet restore src/MyApp/MyApp.csproj  # Update this path
+        run: dotnet restore UXI_Mortgage/UXI_Mortgage/UXI_Mortgage/UXI_Mortgage.csproj
 
       - name: Build the application
-        run: dotnet build src/MyApp/MyApp.csproj --configuration Release --output ./artifacts  # Update this path
-
+        run: dotnet build UXI_Mortgage/UXI_Mortgage/UXI_Mortgage/UXI_Mortgage.csproj --configuration Release --output ./artifacts
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -39,10 +38,10 @@ jobs:
           dotnet-version: '8.0'
 
       - name: Run unit tests
-        run: dotnet test src/MyApp/MyApp.csproj --configuration Release --no-restore  # Update this path
+        run: dotnet test UXI_Mortgage/UXI_Mortgage/UXI_Mortgage/UXI_Mortgage.csproj --configuration Release --no-restore  # Update this path
 
       - name: Run code quality checks
-        run: dotnet format src/MyApp/MyApp.csproj --check  # Update this path
+        run: dotnet format UXI_Mortgage/UXI_Mortgage/UXI_Mortgage/UXI_Mortgage.csproj --check  # Update this path
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,7 +58,7 @@ jobs:
 
       - name: Deploy to Staging
         env:
-          DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_TOKEN }}  # Add your secret for deployment
+          DEPLOYMENT_TOKEN: ${{ secrets.DEPLOYMENT_Test }}
         run: |
           echo "Deploying to staging environment..."
           # Add your deployment commands here
