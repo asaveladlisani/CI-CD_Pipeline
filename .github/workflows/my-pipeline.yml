@@ -18,13 +18,13 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0'  # Change to your target .NET version
+          dotnet-version: '8.0'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src/MyApp/MyApp.csproj  # Update this path
 
       - name: Build the application
-        run: dotnet build --configuration Release --output ./artifacts
+        run: dotnet build src/MyApp/MyApp.csproj --configuration Release --output ./artifacts  # Update this path
 
   test:
     runs-on: ubuntu-latest
@@ -39,10 +39,10 @@ jobs:
           dotnet-version: '8.0'
 
       - name: Run unit tests
-        run: dotnet test --configuration Release --no-restore
+        run: dotnet test src/MyApp/MyApp.csproj --configuration Release --no-restore  # Update this path
 
       - name: Run code quality checks
-        run: dotnet format --check
+        run: dotnet format src/MyApp/MyApp.csproj --check  # Update this path
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,10 +50,10 @@ jobs:
     if: github.ref == 'refs/heads/main' && success()
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0'
 
@@ -63,4 +63,3 @@ jobs:
         run: |
           echo "Deploying to staging environment..."
           # Add your deployment commands here
-          # For example, using SSH or a cloud provider CLI
